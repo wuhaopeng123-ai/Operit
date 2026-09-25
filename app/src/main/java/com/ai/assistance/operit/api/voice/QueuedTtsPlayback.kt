@@ -40,7 +40,9 @@ internal class QueuedTtsPlayback(
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val speakQueue = Channel<Request>(Channel.UNLIMITED)
-    private val playbackQueue = Channel<PreparedRequest>(capacity = 1)
+    // 预留几段缓冲：准备线程可以在当前段播放期间继续合成后续片段，
+    // 播放线程仍严格按入队顺序消费，避免片段之间出现一次完整往返的空档。
+    private val playbackQueue = Channel<PreparedRequest>(capacity = 3)
     private val stopGeneration = AtomicLong(0)
     private val isPaused = AtomicBoolean(false)
     private val _isSpeaking = MutableStateFlow(false)
@@ -100,6 +102,39 @@ internal class QueuedTtsPlayback(
         )
         speakQueue.send(request)
         completion.await()
+    }
+
+    /**
+     * 把一段文本加入合成队列后立即返回，不等待播放结束。
+     *
+     * 与 [speak] 的区别只有「是否等待播放完成」：顺序、打断、代际校验都走同一条队列，
+     * 因此可以先把整段话全部入队，再按顺序等待，让合成与播放重叠起来。
+     */
+    fun enqueue(
+        text: String,
+        interrupt: Boolean,
+        rate: Float?,
+        pitch: Float?,
+        extraParams: Map<String, String>,
+    ): CompletableDeferred<Boolean> {
+        if (interrupt) {
+            clearForInterrupt()
+        }
+
+        val completion = CompletableDeferred<Boolean>()
+        val request =
+            Request(
+                text = text,
+                rate = rate,
+                pitch = pitch,
+                extraParams = extraParams,
+                generation = stopGeneration.get(),
+                completion = completion,
+            )
+        if (speakQueue.trySend(request).isFailure) {
+            completion.complete(false)
+        }
+        return completion
     }
 
     suspend fun stop(): Boolean = withContext(Dispatchers.IO) {

@@ -42,6 +42,7 @@ import java.io.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -3040,32 +3041,43 @@ class ChatViewModel(private val context: Context) : ViewModel() {
 
                 val segments = TtsSegmenter.split(cleanMessage)
                 AppLogger.d(TAG, "speech[segments] count=${segments.size} lengths=${segments.joinToString(prefix = "[", postfix = "]") { it.length.toString() }}")
-                var isFirstSegment = true
-                for ((index, segment) in segments.withIndex()) {
-                    if (_isSpeechPaused.value) {
-                        logSpeechState("waitResume", "segmentIndex=$index")
-                        isSpeechPaused.filter { !it }.first()
-                        logSpeechState("resumeObserved", "segmentIndex=$index")
-                    }
+                // 先按顺序把整段话全部入队，再统一等待结果：
+                // 这样「合成下一段」与「播放当前段」可以重叠，段间不再出现一次完整往返的空档。
+                if (_isSpeechPaused.value) {
+                    logSpeechState("waitResume", "segmentIndex=0")
+                    isSpeechPaused.filter { !it }.first()
+                    logSpeechState("resumeObserved", "segmentIndex=0")
+                }
 
+                val completions = ArrayList<Deferred<Boolean>>(segments.size)
+                for ((index, segment) in segments.withIndex()) {
+                    val isFirstSegment = index == 0
                     AppLogger.d(
                         TAG,
-                        "speech[segmentSpeak] index=$index/${segments.lastIndex} interrupt=${if (isFirstSegment) interrupt else false} len=${segment.length} preview=\"${speechPreview(segment)}\""
+                        "speech[segmentEnqueue] index=$index/${segments.lastIndex} interrupt=${if (isFirstSegment) interrupt else false} len=${segment.length} preview=\"${speechPreview(segment)}\""
                     )
-                    val success = currentVoiceService.speak(
-                        text = segment,
-                        interrupt = if (isFirstSegment) interrupt else false,
-                        rate = null,
-                        pitch = null
+                    completions +=
+                        currentVoiceService.enqueueSpeak(
+                            text = segment,
+                            interrupt = if (isFirstSegment) interrupt else false,
+                            rate = null,
+                            pitch = null
+                        )
+                }
+
+                for ((index, completion) in completions.withIndex()) {
+                    val success = completion.await()
+                    AppLogger.d(
+                        TAG,
+                        "speech[segmentResult] index=$index success=$success provider=${currentVoiceService.javaClass.simpleName}"
                     )
-                    AppLogger.d(TAG, "speech[segmentResult] index=$index success=$success provider=${currentVoiceService.javaClass.simpleName}")
 
                     if (!success) {
                         logSpeechState("segmentFailed", "index=$index")
                         uiStateDelegate.showToast(context.getString(R.string.chat_speak_failed))
+                        currentVoiceService.stop()
                         break
                     }
-                    isFirstSegment = false
                 }
             } catch (e: CancellationException) {
                 logSpeechState(

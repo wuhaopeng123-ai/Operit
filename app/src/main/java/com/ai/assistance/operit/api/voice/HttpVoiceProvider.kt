@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.Flow
@@ -197,6 +198,32 @@ open class HttpVoiceProvider(
             "speak request interrupt=$interrupt len=${text.length} preview=\"${speechPreview(text)}\" rate=$rate pitch=$pitch voice=$currentVoiceId initialized=$isInitialized extraKeys=${extraParams.keys}"
         )
         playbackQueue.speak(
+            text = text,
+            interrupt = interrupt,
+            rate = rate,
+            pitch = pitch,
+            extraParams = extraParams
+        )
+    }
+
+    /**
+     * 入队朗读，不等待播放完成。
+     *
+     * [QueuedTtsPlayback] 会按顺序合成并播放，因此提前把后续片段全部入队，
+     * 就能让下一段的 HTTP 合成与当前段的播放重叠，消除段间等待。
+     */
+    override suspend fun enqueueSpeak(
+        text: String,
+        interrupt: Boolean,
+        rate: Float?,
+        pitch: Float?,
+        extraParams: Map<String, String>
+    ): Deferred<Boolean> = withContext(Dispatchers.IO) {
+        AppLogger.d(
+            TAG,
+            "enqueue speak interrupt=$interrupt len=${text.length} preview=\"${speechPreview(text)}\" initialized=$isInitialized extraKeys=${extraParams.keys}"
+        )
+        playbackQueue.enqueue(
             text = text,
             interrupt = interrupt,
             rate = rate,

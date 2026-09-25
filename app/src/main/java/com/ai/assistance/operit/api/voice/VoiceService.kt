@@ -1,5 +1,7 @@
 package com.ai.assistance.operit.api.voice
 
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.flow.Flow
 
 /** 语音服务接口，定义与不同语音引擎进行交互的标准方法 */
@@ -76,6 +78,27 @@ interface VoiceService {
      * @return 设置是否成功
      */
     suspend fun setVoice(voiceId: String): Boolean
+
+    /**
+     * 将文本加入语音队列后立即返回，不等待该段播放结束。
+     *
+     * 支持流水的实现（如 HttpVoiceProvider）会让「合成下一段」与「播放当前段」重叠，
+     * 从而消除片段之间的一次完整网络往返还等待；默认实现退化为 [speak] 的同步语义，
+     * 不支持流水的提供方行为与之前完全一致。
+     *
+     * @return 一个在该段播放结束时完成的 Deferred，语义与 [speak] 的返回值一致
+     */
+    suspend fun enqueueSpeak(
+            text: String,
+            interrupt: Boolean = false,
+            rate: Float? = null,
+            pitch: Float? = null,
+            extraParams: Map<String, String> = emptyMap()
+    ): Deferred<Boolean> {
+        val result = CompletableDeferred<Boolean>()
+        result.complete(speak(text, interrupt, rate, pitch, extraParams))
+        return result
+    }
 
     /**
      * 表示TTS语音的数据类
