@@ -439,7 +439,7 @@ android {
         }
         create("clone") {
             initWith(getByName("debug"))
-            applicationIdSuffix = ".clone"
+            applicationIdSuffix = ""
             if (releaseSigningConfig != null) {
                 signingConfig = releaseSigningConfig
             }
