@@ -694,12 +694,16 @@ object AIMessageManager {
         summaryConfig: ConversationSummaryConfig = ConversationSummaryConfig()
     ): ChatMessage? {
         val lastSummaryIndex = messages.indexOfLast { it.sender == "summary" }
-        val previousSummary = if (lastSummaryIndex != -1) messages[lastSummaryIndex].content.trim() else null
-
+        // 上一段总结只用于计算「新片段从哪开始」，不再拼进新总结正文。
+        // 原因：落盘时旧 summary 会保留在链上（前缀不变才能命中缓存），
+        // 新 summary 若再把上一段内容抄一遍，链上就会重复。
+        // 因此每条 summary 只描述自己那一段，语义由链的顺序拼起来。
         val messagesToSummarize = when {
             lastSummaryIndex == -1 -> messages.filter { it.sender == "user" || it.sender == "ai" }
-            else -> messages.subList(lastSummaryIndex + 1, messages.size)
-                .filter { it.sender == "user" || it.sender == "ai" }
+            else ->
+                messages
+                    .subList(lastSummaryIndex + 1, messages.size)
+                    .filter { it.sender == "user" || it.sender == "ai" }
         }
 
         if (messagesToSummarize.isEmpty()) {
@@ -1047,10 +1051,12 @@ object AIMessageManager {
 
         return try {
             AppLogger.d(TAG, "开始使用AI生成对话总结：总结 ${messagesToSummarize.size} 条消息")
+            // 只传本段消息，不传上一段总结：旧 summary 会作为独立节点留在链上，
+// 再传一次会让模型把旧内容重抄进新节点，缓存前缀也会随之抖动。
             val summary =
                 enhancedAiService.generateSummary(
                     conversationToSummarize,
-                    previousSummary,
+                    null,
                     summaryConfig
                 )
             AppLogger.d(TAG, "AI生成总结完成: ${summary.take(50)}...")
@@ -1340,13 +1346,22 @@ object AIMessageManager {
         groupOrchestrationMode: Boolean = false
     ): List<PromptTurn> {
         val totalStartTime = messageTimingNow()
-        // 1. 找到最后一条总结消息，只处理总结之后的消息
+        // 1. 上下文 = 全部历史总结（按序）+ 最后一条总结之后的原文。
+        //
+        // 缓存优先设计：前缀缓存命中的前提是「从第 1 个 token 起逐字不变」。
+        // 绝不能只留最后一条总结——那样每总结一次第一个 token 就换人，缓存全灭。
+        // 正确做法是保留整条 summary 链：S1、S2… 已各自的段落，按序固定投放，
+        // 每次新总结只会在链尾追加一条，链本身逐字不变，前缀缓存可持续命中；
+        // 被压缩掉的只是「链尾之后再下一段」的原文，前缀不受影响。
         val lastSummaryIndex = messages.indexOfLast { it.sender == "summary" }
-        val relevantMessages = if (lastSummaryIndex != -1) {
-            messages.subList(lastSummaryIndex, messages.size)
-        } else {
-            messages
-        }
+        val relevantMessages =
+            if (lastSummaryIndex == -1) {
+                messages
+            } else {
+                val summaryChain = messages.filter { it.sender == "summary" }
+                val tail = messages.subList(lastSummaryIndex + 1, messages.size)
+                summaryChain + tail
+            }
 
         // 2. 判断是否启用角色隔离模式
         val isRoleScopedMode = splitByRole && !targetRoleName.isNullOrBlank()

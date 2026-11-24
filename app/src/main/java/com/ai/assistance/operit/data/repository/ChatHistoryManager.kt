@@ -866,10 +866,14 @@ class ChatHistoryManager private constructor(private val context: Context) {
                         else -> null
                     }
 
-                if (beforeMessage?.sender == "summary" || afterMessage?.sender == "summary") {
+                // 相邻已经是 summary 时不能再插入：否则 summary 会互相挤开，
+                // 整条链的位置发生位移，前缀缓存当场失效。
+                // 但链式落盘的正常形态是「旧 summary 后面直接接新 summary」，
+                // 所以只有 after 已经是 summary 时才算冲突；before 是 summary 要放行。
+                if (afterMessage?.sender == "summary") {
                     AppLogger.w(
                         TAG,
-                        "相邻消息已是 summary，取消插入: chatId=$chatId, before=${beforeMessage?.timestamp}, after=${afterMessage?.timestamp}",
+                        "后一位已是 summary，取消插入: chatId=$chatId, before=${beforeMessage?.timestamp}, after=${afterMessage?.timestamp}",
                     )
                     return null
                 }
