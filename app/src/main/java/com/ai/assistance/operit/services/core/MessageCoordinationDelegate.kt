@@ -70,16 +70,6 @@ class MessageCoordinationDelegate(
 ) {
     companion object {
         private const val TAG = "MessageCoordinationDelegate"
-
-        // 输出预算：为输出保留窗口的 20%，最少 16K、最多 128K。
-        // provider 侧可能不发 max_output_tokens，服务端会按输出为 0 直接 400，
-        // 因此输入水位必须扣掉这块预留。
-        private const val SUMMARY_OUTPUT_RESERVE_RATIO = 0.2f
-        private const val SUMMARY_MIN_OUTPUT_RESERVE_TOKENS = 16_384L
-        private const val SUMMARY_MAX_OUTPUT_RESERVE_TOKENS = 131_072L
-
-        // 硬水位：输入不得超过预算的 80%，到线即同步落盘，避免撞服务端上限。
-        private const val SUMMARY_HARD_WATERMARK_RATIO = 0.8
     }
 
     // 总结状态（使用 summarizeHistory 时）
@@ -685,42 +675,20 @@ class MessageCoordinationDelegate(
                 .coerceIn(0L, Int.MAX_VALUE.toLong())
                 .toInt()
 
-        // 输出预算：provider 可能根本不发 max_output_tokens，
-        // 服务端就会按「输入已吃满窗口」推算可用输出为 0，直接 400。
-        // 这里始终给输出留一块空间，输入侧按 (窗口 - 输出预留) 计算水位。
-        val outputReserveTokensForSend =
-            (maxTokensForSend * SUMMARY_OUTPUT_RESERVE_RATIO)
-                .toLong()
-                .coerceIn(SUMMARY_MIN_OUTPUT_RESERVE_TOKENS, SUMMARY_MAX_OUTPUT_RESERVE_TOKENS)
-                .toInt()
-                .coerceAtMost((maxTokensForSend / 2).coerceAtLeast(0))
-        val inputBudgetForSend =
-            (maxTokensForSend - outputReserveTokensForSend).coerceAtLeast(1)
-
-        // 硬水位：无论如何不超过输入预算的 80%（用户可调低，但不会被调高到危险区）。
-        val hardWatermarkForSend =
-            tokenUsageThresholdForSend.coerceAtMost(SUMMARY_HARD_WATERMARK_RATIO)
-
         // 如果不是续写，检查是否需要总结
         if (turnOptions.persistTurn && !isBackgroundSend && !isContinuation && !skipSummaryCheck) {
             val currentMessages = runBlocking { chatHistoryDelegate.getCurrentRuntimeChatHistorySnapshot() }
             val currentTokens = tokenStatsDelegate.currentWindowSizeFlow.value
-            // 判定基于输入预算，而不是整个窗口，避免把输出份额算成可用输入。
-            val usageRatioForSend = currentTokens.toDouble() / inputBudgetForSend.toDouble()
-            // 越过硬水位就必须本轮同步落盘，否则会拿超长 prompt 直接撞服务端上限。
-            val isOverHardWatermark = usageRatioForSend >= hardWatermarkForSend
 
-            val isShouldGenerateSummary =
-                isOverHardWatermark ||
-                    AIMessageManager.shouldGenerateSummary(
-                        messages = currentMessages,
-                        currentTokens = currentTokens,
-                        maxTokens = inputBudgetForSend,
-                        tokenUsageThreshold = tokenUsageThresholdForSend,
-                        enableSummary = chatContextSettings.enableSummary,
-                        enableSummaryByMessageCount = chatContextSettings.enableSummaryByMessageCount,
-                        summaryMessageCountThreshold = chatContextSettings.summaryMessageCountThreshold
-                    )
+            val isShouldGenerateSummary = AIMessageManager.shouldGenerateSummary(
+                messages = currentMessages,
+                currentTokens = currentTokens,
+                maxTokens = maxTokensForSend,
+                tokenUsageThreshold = tokenUsageThresholdForSend,
+                enableSummary = chatContextSettings.enableSummary,
+                enableSummaryByMessageCount = chatContextSettings.enableSummaryByMessageCount,
+                summaryMessageCountThreshold = chatContextSettings.summaryMessageCountThreshold
+            )
 
             if (isShouldGenerateSummary) {
                 val snapshotMessages = currentMessages.toList()
@@ -728,52 +696,20 @@ class MessageCoordinationDelegate(
                 val beforeTimestamp = snapshotMessages.getOrNull(insertPosition - 1)?.timestamp
                 val afterTimestamp = snapshotMessages.getOrNull(insertPosition)?.timestamp
 
-                // 越过硬水位时同步落盘，保证本轮发出的就是压缩后的上下文；
-                // 未越线才走异步，不阻塞发送。
-                if (isOverHardWatermark && chatContextSettings.enableSummary) {
-                    val summarized =
-                        runCatching {
-                            runBlocking {
-                                summarizeHistory(
-                                    autoContinue = false,
-                                    promptFunctionType = promptFunctionType,
-                                    chatIdOverride = chatId,
-                                    chatModelConfigIdOverride = resolvedChatModelConfigIdOverride,
-                                    chatModelIndexOverride = resolvedChatModelIndexOverride,
-                                    memorySpaceIdOverride = resolvedMemorySpaceIdOverride,
-                                    roleCardIdOverride = roleCardId,
-                                    isGroupChat = isGroupChatSession(chatId),
-                                    isGroupOrchestrationTurn = isGroupOrchestrationTurn,
-                                    groupParticipantNamesText = groupParticipantNamesText
-                                )
-                            }
-                        }.getOrElse { error ->
-                            AppLogger.w(TAG, "硬水位同步总结失败，继续按原阈值发送: ${error.message}")
-                            false
-                        }
-                    if (summarized) {
-                        // 已压缩回落到硬水位以下，本轮不再重复判定。
-                        tokenUsageThresholdForSend = hardWatermarkForSend
-                    } else {
-                        // 压缩失败也要能发出去，抬高阈值避免本轮反复触发。
-                        tokenUsageThresholdForSend += 0.5
-                    }
-                } else {
-                    // 异步生成总结，不阻塞当前消息发送
-                    launchAsyncSummaryForSend(
-                        snapshotMessages = snapshotMessages,
-                        beforeTimestamp = beforeTimestamp,
-                        afterTimestamp = afterTimestamp,
-                        originalChatId = chatId,
-                        roleCardId = roleCardId,
-                        chatModelConfigIdOverride = resolvedChatModelConfigIdOverride,
-                        chatModelIndexOverride = resolvedChatModelIndexOverride,
-                        memorySpaceIdOverride = resolvedMemorySpaceIdOverride
-                    )
+                // 异步生成总结，不阻塞当前消息发送
+                launchAsyncSummaryForSend(
+                    snapshotMessages = snapshotMessages,
+                    beforeTimestamp = beforeTimestamp,
+                    afterTimestamp = afterTimestamp,
+                    originalChatId = chatId,
+                    roleCardId = roleCardId,
+                    chatModelConfigIdOverride = resolvedChatModelConfigIdOverride,
+                    chatModelIndexOverride = resolvedChatModelIndexOverride,
+                    memorySpaceIdOverride = resolvedMemorySpaceIdOverride
+                )
 
-                    // 本次请求的Token阈值在原基础上增加 0.5
-                    tokenUsageThresholdForSend += 0.5
-                }
+                // 本次请求的Token阈值在原基础上增加 0.5
+                tokenUsageThresholdForSend += 0.5
             }
         }
 
@@ -1464,37 +1400,15 @@ class MessageCoordinationDelegate(
             summaryMessageCountThreshold = chatContextSettings.summaryMessageCountThreshold
         )
         if (shouldSummarize) {
-            // 与私聊一致：越过硬水位就同步落盘再收尾，避免下一次发送又带着超窗原文。
-            val usageRatio =
-                if (maxTokens > 0) currentTokens.toDouble() / maxTokens else 0.0
-            val hardWatermark =
-                chatContextSettings.summaryTokenThreshold.toDouble()
-                    .coerceAtMost(SUMMARY_HARD_WATERMARK_RATIO)
-            if (usageRatio >= hardWatermark) {
-                AppLogger.d(
-                    TAG,
-                    "群聊越过硬水位($usageRatio >= $hardWatermark)，同步落盘"
-                )
-                runBlocking {
-                    summarizeHistory(
-                        autoContinue = false,
-                        promptFunctionType = promptFunctionType,
-                        chatIdOverride = chatId,
-                        chatModelConfigIdOverride = currentChatModelConfigIdOverride,
-                        chatModelIndexOverride = currentChatModelIndexOverride,
-                        isGroupChat = true
-                    )
-                }
-            } else {
-                summarizeHistory(
-                    autoContinue = false,
-                    promptFunctionType = promptFunctionType,
-                    chatIdOverride = chatId,
-                    chatModelConfigIdOverride = currentChatModelConfigIdOverride,
-                    chatModelIndexOverride = currentChatModelIndexOverride,
-                    isGroupChat = true
-                )
-            }
+            // 群组编排后的总结，标记为群聊模式
+            summarizeHistory(
+                autoContinue = false,
+                promptFunctionType = promptFunctionType,
+                chatIdOverride = chatId,
+                chatModelConfigIdOverride = currentChatModelConfigIdOverride,
+                chatModelIndexOverride = currentChatModelIndexOverride,
+                isGroupChat = true
+            )
         }
     }
 
