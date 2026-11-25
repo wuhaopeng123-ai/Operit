@@ -29,6 +29,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -65,9 +66,17 @@ import com.ai.assistance.operit.util.AppLogger
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.coroutines.resume
+
+/** 主题快照取自 DataStore，首次读取或迁移卡住时不能无限转圈。 */
+private const val THEME_SNAPSHOT_TIMEOUT_MS = 5_000L
+
+private const val THEME_LOAD_FAILED_TEXT = "主题数据读取失败或超时"
+private const val THEME_RELOAD_TEXT = "重新加载"
 
 internal data class ThemeSettingsShared(
     val context: android.content.Context,
@@ -107,11 +116,32 @@ internal fun ThemeSettingsContent() {
     )
     var characterCards by remember { mutableStateOf(emptyList<CharacterCard>()) }
 
-    LaunchedEffect(characterCardIds) {
-        characterCards = characterCardManager.getAllCharacterCards()
+    // DataStore 迟迟不发射时也要有出口，避免整页永久停在转圈。
+    var promptTimedOut by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        delay(THEME_SNAPSHOT_TIMEOUT_MS)
+        if (activePrompt == null) {
+            promptTimedOut = true
+        }
     }
 
-    val initialThemeTarget = activePrompt
+    LaunchedEffect(characterCardIds) {
+        characterCards = try {
+            characterCardManager.getAllCharacterCards()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            AppLogger.e("ThemeSettings", "Failed to load character cards", e)
+            emptyList()
+        }
+    }
+
+    val initialThemeTarget = activePrompt ?: if (promptTimedOut) {
+        ActivePrompt.CharacterCard(CharacterCardManager.DEFAULT_CHARACTER_CARD_ID)
+    } else {
+        null
+    }
     if (initialThemeTarget == null) {
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -154,6 +184,7 @@ internal fun ThemeSettingsContentEditor(
     var exitContinuation by remember { mutableStateOf<CancellableContinuation<Boolean>?>(null) }
     var isSaving by remember { mutableStateOf(false) }
     var targetSwitchesInFlight by remember { mutableStateOf(0) }
+    var themeSnapshotError by remember { mutableStateOf(false) }
     val scrollState = androidx.compose.foundation.rememberScrollState()
 
     LaunchedEffect(activeThemeTarget, editorReloadToken) {
@@ -172,18 +203,33 @@ internal fun ThemeSettingsContentEditor(
             return@LaunchedEffect
         }
         editorState = null
-        val snapshot = when (target) {
-            is ActivePrompt.CharacterCard ->
-                preferencesManager.resolveThemePreferenceSnapshot(characterCardId = target.id)
+        val snapshot = try {
+            withTimeoutOrNull(THEME_SNAPSHOT_TIMEOUT_MS) {
+                when (target) {
+                    is ActivePrompt.CharacterCard ->
+                        preferencesManager.resolveThemePreferenceSnapshot(characterCardId = target.id)
 
-            is ActivePrompt.CharacterGroup ->
-                preferencesManager.resolveThemePreferenceSnapshot(characterGroupId = target.id)
+                    is ActivePrompt.CharacterGroup ->
+                        preferencesManager.resolveThemePreferenceSnapshot(characterGroupId = target.id)
+                }
+            }
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            AppLogger.e("ThemeSettings", "Failed to resolve theme snapshot", e)
+            null
         }
         if (activeThemeTarget == target) {
-            editorState = ThemeEditorState(
-                target = target,
-                session = ThemeEditorSession(preferencesManager, snapshot.values),
-            )
+            if (snapshot == null) {
+                // 取数失败或䶅时保持空态并给出重试入口，避免整页永久停在转圈。
+                themeSnapshotError = true
+            } else {
+                themeSnapshotError = false
+                editorState = ThemeEditorState(
+                    target = target,
+                    session = ThemeEditorSession(preferencesManager, snapshot.values),
+                )
+            }
         }
     }
     val draftForDirtyState = editorState?.session
@@ -356,11 +402,28 @@ internal fun ThemeSettingsContentEditor(
 
         val draft = editorState?.session
         if (draft == null) {
-            Box(
+            Column(
                 modifier = Modifier.fillMaxWidth().weight(1f),
-                contentAlignment = Alignment.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
             ) {
                 CircularProgressIndicator()
+                if (themeSnapshotError) {
+                    Text(
+                        text = THEME_LOAD_FAILED_TEXT,
+                        modifier = Modifier.padding(start = 16.dp, top = 12.dp, end = 16.dp),
+                        color = MaterialTheme.colorScheme.error,
+                    )
+                    OutlinedButton(
+                        onClick = {
+                            themeSnapshotError = false
+                            editorReloadToken += 1
+                        },
+                        modifier = Modifier.padding(top = 8.dp),
+                    ) {
+                        Text(THEME_RELOAD_TEXT)
+                    }
+                }
             }
         } else {
             DisposableEffect(draft) {
