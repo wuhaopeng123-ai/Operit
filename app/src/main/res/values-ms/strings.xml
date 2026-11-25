@@ -544,7 +544,7 @@
     <string name="about_description">Operit AI ialah aplikasi pembantu pintar yang membantu pengguna menggunakan peranti dengan lebih cekap, menyediakan analisis antara muka, perbualan sembang dan fungsi lain.</string>
     <string name="about_developer">Pembangun: &lt;a href="https://github.com/AAswordman"&gt;AAswordman&lt;/a&gt;</string>
     <string name="about_contact">Hubungi kami: aaswordsman@foxmail.com</string>
-    <string name="about_website">&lt;a href="https://github.com/wuhaopeng123-ai/Operit"&gt;GitHub: https://github.com/wuhaopeng123-ai/Operit&lt;/a&gt;</string>
+    <string name="about_website">&lt;a href="https://github.com/AAswordman/Operit"&gt;GitHub: https://github.com/AAswordman/Operit&lt;/a&gt;</string>
     <string name="about_copyright">© 2025 - 2026 Operit. Hak cipta terpelihara.</string>
     <string name="star_on_github">Beri Bintang di GitHub</string>
     <string name="update_log">Log kemas kini</string>
@@ -2764,6 +2764,7 @@
     <string name="chat_create_dedicated_terminal_session_failed">Tidak dapat mencipta sesi terminal berdedikasi</string>
     <string name="chat_create_workspace_terminal_session_failed">Tidak dapat mencipta sesi terminal ruang kerja</string>
     <string name="chat_execute_command_failed">Gagal melaksanakan arahan: %1$s</string>
+    <string name="chat_execute_command_cancel_failed">Tidak dapat membatalkan arahan: sesi terminal sasaran telah ditutup atau belum sedia</string>
     <string name="workspace_command_already_running">Sudah ada arahan ruang kerja sedang berjalan</string>
     <string name="workspace_command_running">Arahan sedang berjalan</string>
     <string name="workspace_command_cancelling">Membatalkan arahan...</string>
@@ -3284,31 +3285,31 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="models_selected_suffix"> telah dipilih</string>
     <string name="model_name_multiple_hint"> (boleh pisahkan berbilang model dengan koma)</string>
     <string name="auto_save_failed">Simpanan automatik gagal</string>
-    <string name="provider_openai">ChatGPT (OpenAI)</string>
-    <string name="provider_xai">Grok (SpaceXAI)</string>
-    <string name="provider_openai_responses">ChatGPT Responses (OpenAI)</string>
-    <string name="provider_openai_responses_generic">OpenAI Responses (Generic)</string>
-    <string name="provider_anthropic">Claude (Anthropic)</string>
-    <string name="provider_anthropic_generic">Claude (Generic)</string>
-    <string name="provider_google">Gemini (Google)</string>
-    <string name="provider_gemini_generic">Gemini (Generic)</string>
-    <string name="provider_baidu">ERNIE (Baidu)</string>
-    <string name="provider_aliyun">Qwen (Alibaba Cloud)</string>
-    <string name="provider_xunfei">Spark (iFLYTEK)</string>
-    <string name="provider_zhipu">GLM (Zhipu)</string>
-    <string name="provider_baichuan">Baichuan (Baichuan)</string>
-    <string name="provider_moonshot">Kimi (Moonshot)</string>
-    <string name="provider_deepseek">DeepSeek (DeepSeek)</string>
-    <string name="provider_mistral">Mistral (Mistral AI)</string>
-    <string name="provider_siliconflow">SiliconFlow (SiliconFlow)</string>
-    <string name="provider_iflow">iFlow (Xingchen Qianxun)</string>
-    <string name="provider_openrouter">OpenRouter (OpenRouter)</string>
-    <string name="provider_opencode">OpenCode (Anomaly Innovations)</string>
-    <string name="provider_infiniai">Infini-AI (Infini-AI)</string>
-    <string name="provider_alipay_bailing">Bailing (Alipay)</string>
-    <string name="provider_lmstudio">LM Studio (Local)</string>
-    <string name="provider_ollama">Ollama (Local)</string>
-    <string name="provider_openai_local">OpenAI (Local)</string>
+    <string name="provider_openai">ChatGPT API</string>
+    <string name="provider_xai">SpaceXAI (Grok)</string>
+    <string name="provider_openai_responses">ChatGPT Responses API</string>
+    <string name="provider_openai_responses_generic">OpenAI Responses generik</string>
+    <string name="provider_anthropic">Anthropic (siri Claude)</string>
+    <string name="provider_anthropic_generic">Anthropic generik</string>
+    <string name="provider_google">Google (siri Gemini)</string>
+    <string name="provider_gemini_generic">Gemini generik</string>
+    <string name="provider_baidu">Baidu (siri ERNIE)</string>
+    <string name="provider_aliyun">Alibaba Cloud (siri Tongyi Qianwen)</string>
+    <string name="provider_xunfei">iFLYTEK (siri Spark)</string>
+    <string name="provider_zhipu">Zhipu AI (siri ChatGLM)</string>
+    <string name="provider_baichuan">Model Baichuan</string>
+    <string name="provider_moonshot">Model Moonshot AI</string>
+    <string name="provider_deepseek">Model DeepSeek</string>
+    <string name="provider_mistral">Mistral AI (Codestral)</string>
+    <string name="provider_siliconflow">SiliconFlow</string>
+    <string name="provider_iflow">iFlow</string>
+    <string name="provider_openrouter">OpenRouter (agregasi pelbagai model)</string>
+    <string name="provider_opencode">OpenCode</string>
+    <string name="provider_infiniai">Infinigence-AI</string>
+    <string name="provider_alipay_bailing">Model Bailing Alipay</string>
+    <string name="provider_lmstudio">LM Studio (model tempatan)</string>
+    <string name="provider_ollama">Ollama (model tempatan)</string>
+    <string name="provider_openai_local">Serasi OpenAI (model tempatan)</string>
 
     <string name="settings_theme_subtitle">Penyesuaian tema dan penampilan</string>
     <string name="layout_adjustment">Pelarasan susun atur</string>
@@ -3449,7 +3450,6 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="endpoint_completion_hint">Petunjuk: Jika anda memasukkan URL asas, sistem akan melengkapkan laluan secara automatik. Untuk melumpuhkan, tambahkan tanda # di hujung URL.</string>
     <string name="api_key">Kunci API</string>
     <string name="api_key_placeholder_default">Tiada kunci ditetapkan. Masukkan di sini atau gunakan Kolam Kunci API</string>
-    <string name="api_key_optional_local">Perkhidmatan tempatan biasanya tidak memerlukan kunci</string>
     <string name="api_key_placeholder_custom">Masukkan kunci API</string>
     <string name="model_name">Nama model</string>
     <string name="model_name_placeholder">Contoh: gpt-4, claude-3-opus-20240229...</string>
@@ -3559,13 +3559,13 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="parameter_type">Jenis parameter</string>
     <string name="settings_title">Tetapan</string>
 
-    <string name="provider_mnn">MNN (Local)</string>
-    <string name="provider_llama_cpp">llama.cpp (Local)</string>
-    <string name="provider_ppinfra">PPInfra (PPIO)</string>
-    <string name="provider_novita">Novita (Novita AI)</string>
-    <string name="provider_minimax">MiniMax (MiniMax)</string>
-    <string name="provider_openai_generic">OpenAI (Generic)</string>
-    <string name="provider_other">Other (Custom)</string>
+    <string name="provider_mnn">Inferens Tempatan MNN</string>
+    <string name="provider_llama_cpp">Inferens Tempatan llama.cpp</string>
+    <string name="provider_ppinfra">Pai Ou Yun</string>
+    <string name="provider_novita">Novita AI</string>
+    <string name="provider_minimax">MiniMax</string>
+    <string name="provider_openai_generic">OpenAI Generik</string>
+    <string name="provider_other">Pembekal Lain</string>
     <string name="select_api_provider_title">Pilih Pembekal API</string>
     <string name="search_providers">Cari Pembekal</string>
     <string name="max_tokens_name">Bilangan Token Maksimum Dijana</string>
@@ -5043,8 +5043,8 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="backup_memory_import_strategy_create_new_desc">Cipta ingatan baharu walaupun UUID sama (mungkin menyebabkan pengulangan)</string>
     <string name="backup_confirm">Sahkan</string>
     <string name="backup_cancel">Batal</string>
-    <string name="provider_doubao">Doubao (Volcengine)</string>
-    <string name="provider_nvidia">NIM (NVIDIA)</string>
+    <string name="provider_doubao">Doubao (Model Volcano)</string>
+    <string name="provider_nvidia">NVIDIA (API Catalog)</string>
     <string name="help_loading_message">Sedang memuatkan manual penggunaan...</string>
     <string name="vd_overlay_a11y_minimize">Minimakan</string>
     <string name="vd_overlay_a11y_exit_fullscreen">Keluar skrin penuh</string>
@@ -6031,6 +6031,7 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="gemini_error_cannot_connect">Tidak dapat menyambung ke pelayan, sila semak sambungan rangkaian atau alamat API</string>
     <string name="gemini_error_max_retries">Gagal mendapatkan respons AI, mencapai had percubaan semula: %1$s</string>
     <string name="gemini_error_response_failed">Gagal mendapatkan respons AI: %1$s</string>
+    <string name="gemini_error_empty_contents">Tiada kandungan mesej untuk dihantar: sejarah perbualan kosong atau hanya mengandungi teks pemikiran</string>
     <string name="gemini_error_connection_timeout">Sambungan tamat masa atau terputus, telah mencuba semula %1$d kali: %2$s</string>
     <string name="gemini_connection_success">Sambungan berjaya!</string>
     <string name="gemini_connection_test_failed">Ujian sambungan gagal: %1$s</string>
@@ -6883,7 +6884,7 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="chat_message_variant_counter">%1$d/%2$d</string>
     <string name="chat_previous_variant">Jawapan sebelumnya</string>
     <string name="chat_next_variant">Jawapan seterusnya</string>
-    <string name="provider_nous_portal">Nous Portal (Nous Research)</string>
+    <string name="provider_nous_portal">Nous Portal</string>
     <string name="market_tab_artifact">Pakej Kotak Pasir</string>
     <string name="market_tab_mcp">MCP</string>
     <string name="market_tab_skill">Skill</string>
@@ -7148,7 +7149,7 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     </plurals>
     <string name="pin_chat">Semat Sembang</string>
     <string name="unpin_chat">Nyahsemat Sembang</string>
-    <string name="provider_mimo">MiMo (Xiaomi)</string>
+    <string name="provider_mimo">Xiaomi MiMo</string>
     <string name="waifu_merge_send">Hantar Bergabung</string>
     <string name="waifu_merge_send_desc">Apabila menghantar beberapa mesej pendek berturut-turut, gabungkan selepas jeda dan serahkan kepada AI untuk diproses</string>
     <string name="waifu_merge_send_delay">Selang Hantar Bergabung</string>
@@ -7467,8 +7468,7 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="artifact_publish_github_release">Siaran GitHub</string>
     <string name="artifact_publish_github_release_asset">Aset Siaran</string>
     <string name="markdown_link_not_openable">Pautan ini menghala ke rujukan dalam dokumen dan tidak boleh dibuka</string>
-    <string name="provider_openai_codex">Codex (OpenAI)</string>
-    <string name="provider_antigravity">Antigravity (Google)</string>
+    <string name="provider_openai_codex">Codex</string>
     <string name="onboarding_config_codex_login_required">Log masuk ke Codex dahulu</string>
     <string name="codex_login_title">Log masuk Codex</string>
     <string name="codex_login_starting">Menyediakan log masuk Codex...</string>
@@ -7571,9 +7571,8 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="github_login_method_external">Log masuk dengan penyemak imbas luaran</string>
     <string name="github_login_starting">Menyediakan kebenaran GitHub…</string>
     <string name="artifact_publish_toolpkg_version_readonly">Versi keluaran ToolPkg berasal daripada manifest dalam pakej, tidak boleh diubah suai secara manual sebelum penerbitan</string>
-    <string name="market_version_incompatible_title">Tidak dapat memuat turun: versi klien tidak disokong</string>
-    <string name="market_version_too_low_message">Versi klien semasa %1$s lebih rendah daripada versi minimum %2$s yang diperlukan oleh sumber ini. Sila kemas kini klien sebelum memuat turun.</string>
-    <string name="market_version_too_high_message">Versi klien semasa %1$s lebih tinggi daripada versi maksimum %2$s yang disokong oleh sumber ini. Sila gunakan versi klien yang disokong.</string>
+    <string name="market_toolpkg_api_incompatible_title">Tidak dapat memasang: API ToolPkg tidak disokong</string>
+    <string name="market_toolpkg_api_incompatible_message">Pemalam ini mengisytiharkan API ToolPkg %1$s. Peranti ini menyokong %2$s, jadi pemalam ini tidak dapat dipasang.</string>
     <string name="external_http_chat_a2a_title">Antara muka A2A Agent</string>
     <string name="external_http_chat_a2a_desc">Menyediakan perkhidmatan A2A 1.0 JSON-RPC menggunakan port pendengar dan Token Bearer yang sama. Berikan alamat Agent Card kepada klien A2A untuk penemuan terlebih dahulu.</string>
     <string name="external_http_chat_a2a_agent_card">Alamat Agent Card</string>
@@ -7751,13 +7750,4 @@ Kini anda boleh menggunakan mod AutoGLM di antara muka perbualan.</string>
     <string name="token_stats_trends">Analisis trend</string>
     <string name="token_stats_settings">Tetapan statistik</string>
     <string name="token_stats_custom_range_confirm">OK</string>
-    <string name="provider_section_generic_compatible">Keserasian Generik</string>
-    <string name="provider_section_proprietary">Pembekal Khusus</string>
-    <string name="provider_section_aggregation">Agregasi Model</string>
-    <string name="provider_section_local">Model Tempatan</string>
-
-
-<!-- 已移除实验性提示 -->
-    <string name="antigravity_login_completing">Melengkapkan kebenaran dan memuatkan butiran akaun…</string>
-    <string name="antigravity_login_timed_out">Masa menunggu kebenaran Google telah melebihi 15 minit. Sila mulakan log masuk semula.</string>
 </resources>
