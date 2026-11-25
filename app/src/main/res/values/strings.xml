@@ -588,7 +588,7 @@
     <string name="about_description">Operit AI是一个智能助手应用，能够帮助用户更高效地使用设备，提供界面分析、聊天对话等功能。</string>
     <string name="about_developer">开发者: &lt;a href="https://github.com/AAswordman"&gt;AAswordman&lt;/a&gt;</string>
     <string name="about_contact">联系我们: aaswordsman@foxmail.com</string>
-    <string name="about_website">&lt;a href="https://github.com/wuhaopeng123-ai/Operit"&gt;GitHub: https://github.com/wuhaopeng123-ai/Operit&lt;/a&gt;</string>
+    <string name="about_website">&lt;a href="https://github.com/AAswordman/Operit"&gt;GitHub: https://github.com/AAswordman/Operit&lt;/a&gt;</string>
     <string name="about_copyright">© 2025 - 2026 Operit. 保留所有权利。</string>
     <string name="star_on_github">在 GitHub 点个 Star</string>
     <string name="update_log">更新日志</string>
@@ -1753,6 +1753,7 @@
     <string name="patch_update_stage_verifying_patch_step">正在校验补丁包 (%1$d/%2$d)</string>
     <string name="patch_update_stage_applying_patch_step">正在合并补丁 (%1$d/%2$d)</string>
     <string name="patch_update_stage_verifying_new_apk_step">正在校验新 APK (%1$d/%2$d)</string>
+    <string name="update_source_failed_reason">%1$s 下载失败：%2$s</string>
     <string name="patch_install_confirm_title">安装补丁更新</string>
     <string name="patch_install_confirm_message">检测到新补丁版本：%1$s\n\n是否现在安装？</string>
     <string name="developer">开发者</string>
@@ -3525,6 +3526,7 @@
     <string name="chat_create_dedicated_terminal_session_failed">无法创建独立终端会话</string>
     <string name="chat_create_workspace_terminal_session_failed">无法创建工作区终端会话</string>
     <string name="chat_execute_command_failed">命令执行失败: %1$s</string>
+    <string name="chat_execute_command_cancel_failed">无法取消命令：目标终端会话已关闭或未就绪</string>
     <string name="workspace_command_already_running">已有工作区命令正在运行</string>
     <string name="workspace_command_running">命令运行中</string>
     <string name="workspace_command_cancelling">正在取消命令...</string>
@@ -4135,7 +4137,6 @@
     <string name="endpoint_completion_hint">提示: 如果您输入的是基础URL，系统将自动补全路径。如需禁用，请在URL末尾添加#号。</string>
     <string name="api_key">API密钥</string>
     <string name="api_key_placeholder_default">未设置密钥，可直接输入或使用密钥池</string>
-    <string name="api_key_optional_local">本地服务通常不需要密钥</string>
     <string name="api_key_placeholder_custom">输入API密钥</string>
     <string name="model_name">模型名称</string>
     <string name="model_name_placeholder">例如: gpt-4, claude-3-opus-20240229...</string>
@@ -4188,47 +4189,45 @@
     <string name="model_name_multiple_hint"> (可用逗号分隔多个模型)</string>
     <string name="auto_save_failed">自动保存失败</string>
     <!-- API Provider names -->
-    <string name="provider_openai">ChatGPT（OpenAI）</string>
-    <string name="provider_xai">Grok（SpaceXAI）</string>
-    <string name="provider_openai_responses">ChatGPT Responses（OpenAI）</string>
-    <string name="provider_openai_responses_generic">OpenAI Responses（通用）</string>
-    <string name="provider_anthropic">Claude（Anthropic）</string>
-    <string name="provider_anthropic_generic">Claude（通用）</string>
-    <string name="provider_google">Gemini（Google）</string>
-    <string name="provider_gemini_generic">Gemini（通用）</string>
-    <string name="provider_baidu">文心一言（百度）</string>
-    <string name="provider_aliyun">千问（阿里云）</string>
-    <string name="provider_xunfei">星火（科大讯飞）</string>
-    <string name="provider_zhipu">GLM（智谱）</string>
-    <string name="provider_baichuan">百川（百川智能）</string>
-    <string name="provider_moonshot">Kimi（月之暗面）</string>
-    <string name="provider_mimo">MiMo（小米）</string>
-    <string name="provider_deepseek">DeepSeek（深度求索）</string>
-    <string name="provider_mistral">Mistral（Mistral AI）</string>
-    <string name="provider_siliconflow">硅基流动（硅基流动）</string>
-    <string name="provider_iflow">心流（星辰千寻）</string>
-    <string name="provider_openrouter">OpenRouter（OpenRouter）</string>
-    <string name="provider_opencode">OpenCode（Anomaly Innovations）</string>
+    <string name="provider_openai">ChatGPT API</string>
+    <string name="provider_xai">SpaceXAI (Grok)</string>
+    <string name="provider_openai_responses">ChatGPT Responses API</string>
+    <string name="provider_openai_responses_generic">OpenAI Responses通用</string>
+    <string name="provider_anthropic">Anthropic (Claude系列)</string>
+    <string name="provider_anthropic_generic">Anthropic通用</string>
+    <string name="provider_google">Google (Gemini系列)</string>
+    <string name="provider_gemini_generic">Gemini通用</string>
+    <string name="provider_baidu">百度 (文心一言系列)</string>
+    <string name="provider_aliyun">阿里云 (通义千问系列)</string>
+    <string name="provider_xunfei">讯飞 (星火认知系列)</string>
+    <string name="provider_zhipu">智谱AI (ChatGLM系列)</string>
+    <string name="provider_baichuan">百川大模型</string>
+    <string name="provider_moonshot">月之暗面大模型</string>
+    <string name="provider_mimo">Xiaomi MiMo</string>
+    <string name="provider_deepseek">Deepseek大模型</string>
+    <string name="provider_mistral">Mistral AI (Codestral)</string>
+    <string name="provider_siliconflow">硅基流动</string>
+    <string name="provider_iflow">iFlow</string>
+    <string name="provider_openrouter">OpenRouter (多模型聚合)</string>
+    <string name="provider_opencode">OpenCode</string>
     <string name="provider_4router">4Router</string>
-    <string name="provider_nous_portal">Nous Portal（Nous Research）</string>
-    <string name="provider_infiniai">无问芯穹（无问芯穹）</string>
-    <string name="provider_alipay_bailing">百灵（支付宝）</string>
+    <string name="provider_nous_portal">Nous Portal</string>
+    <string name="provider_infiniai">无问芯穹</string>
+    <string name="provider_alipay_bailing">支付宝百灵大模型</string>
     <string name="provider_lmstudio">LM Studio（本地模型）</string>
     <string name="provider_ollama">Ollama（本地模型）</string>
-    <string name="provider_openai_local">OpenAI（本地模型）</string>
-    <string name="provider_mnn">MNN（本地推理）</string>
-    <string name="provider_llama_cpp">llama.cpp（本地推理）</string>
-    <string name="provider_ppinfra">派欧云（PPIO）</string>
-    <string name="provider_novita">Novita（Novita AI）</string>
-    <string name="provider_minimax">MiniMax（MiniMax）</string>
-    <string name="provider_openai_generic">OpenAI（通用）</string>
-    <string name="provider_other">其他（自定义）</string>
+    <string name="provider_openai_local">OpenAI兼容（本地模型）</string>
+    <string name="provider_mnn">MNN 本地推理</string>
+    <string name="provider_llama_cpp">llama.cpp 本地推理</string>
+    <string name="provider_ppinfra">派欧云</string>
+    <string name="provider_novita">Novita AI</string>
+    <string name="provider_minimax">MiniMax</string>
+    <string name="provider_openai_generic">OpenAI通用</string>
+    <string name="provider_other">其他供应商</string>
     <string name="select_api_provider_title">选择API提供商</string>
     <string name="search_providers">搜索提供商</string>
     <string name="provider_section_generic_compatible">通用兼容</string>
     <string name="provider_section_proprietary">专有供应商</string>
-    <string name="provider_section_aggregation">模型聚合</string>
-    <string name="provider_section_local">本地模型</string>
     <!-- ModelParametersSection strings -->
     <string name="max_tokens_name">最大生成Token数</string>
     <string name="max_tokens_description">控制AI每次最多生成的Token数量</string>
@@ -4993,9 +4992,8 @@
     <string name="unsupported_artifact_version_title">当前软件版本可能不兼容</string>
     <string name="unsupported_artifact_version_message">「%1$s」声明支持的软件版本为 %3$s，当前软件版本是 %2$s。继续下载仍可能失败或不可用。</string>
     <string name="continue_download_anyway">仍然继续下载</string>
-    <string name="market_version_incompatible_title">无法下载：客户端版本不受支持</string>
-    <string name="market_version_too_low_message">当前客户端版本 %1$s 低于该资源要求的最低版本 %2$s。请更新客户端后再下载。</string>
-    <string name="market_version_too_high_message">当前客户端版本 %1$s 高于该资源最高支持的版本 %2$s。请使用受支持的客户端版本。</string>
+    <string name="market_toolpkg_api_incompatible_title">无法安装：ToolPkg API 不受支持</string>
+    <string name="market_toolpkg_api_incompatible_message">该插件声明的 ToolPkg API 版本为 %1$s，本机支持的版本为 %2$s，无法安装此插件。</string>
     <string name="publisher_colon">发布者: %1$s</string>
     <string name="market_registrar_colon">登记者 %1$s</string>
     <string name="downloaded_already">已下载</string>
@@ -6231,8 +6229,8 @@
     <string name="backup_memory_import_strategy_create_new_desc">即使UUID相同也创建新记忆（可能导致重复）</string>
     <string name="backup_confirm">确认</string>
     <string name="backup_cancel">取消</string>
-    <string name="provider_doubao">豆包（火山引擎）</string>
-    <string name="provider_nvidia">NIM（NVIDIA）</string>
+    <string name="provider_doubao">豆包（火山模型）</string>
+    <string name="provider_nvidia">NVIDIA（API Catalog）</string>
 
     <!-- Help Screen - Mirror Selection Dialog -->
     <string name="help_loading_message">正在加载使用手册...</string>
@@ -7325,6 +7323,7 @@
     <string name="gemini_error_cannot_connect">无法连接到服务器，请检查网络连接或API地址是否正确</string>
     <string name="gemini_error_max_retries">AI响应获取失败，已达最大重试次数: %1$s</string>
     <string name="gemini_error_response_failed">AI响应获取失败: %1$s</string>
+    <string name="gemini_error_empty_contents">没有可发送的消息内容：对话历史为空或只包含思考内容</string>
     <string name="gemini_error_connection_timeout">连接超时或中断，已重试 %1$d 次: %2$s</string>
     <string name="gemini_connection_success">连接成功！</string>
     <string name="gemini_connection_test_failed">连接测试失败: %1$s</string>
@@ -8482,7 +8481,7 @@
     <string name="token_stats_detail_open">点击查看详细数据</string>
     <string name="markdown_link_not_openable">该链接指向文档内部的引用，无法打开</string>
 
-    <string name="provider_openai_codex">Codex（OpenAI）</string>
+    <string name="provider_openai_codex">Codex</string>
     <string name="onboarding_config_codex_login_required">请先登录 Codex</string>
     <string name="codex_login_title">登录 Codex</string>
     <string name="codex_login_starting">正在准备 Codex 登录...</string>
@@ -8507,31 +8506,62 @@
     <string name="codex_usage_unavailable">额度暂时不可用</string>
     <string name="codex_reset_after_days">%1$d 天后重置</string>
     <string name="codex_reset_after_clock">%1$02d:%2$02d 后重置</string>
+    <!-- 年度报告：抽屉入口徽章的无障碍描述 -->
+    <string name="annual_report_entry_description">打开 %1$d 年度报告</string>
 
-    <string name="provider_antigravity">Antigravity（Google）</string>
-    <string name="onboarding_config_antigravity_login_required">请先登录 Antigravity</string>
-    <string name="antigravity_login_title">登录 Antigravity</string>
-    <string name="antigravity_login_starting">正在准备 Antigravity 登录...</string>
-    <string name="antigravity_login_waiting">请在浏览器中完成 Google 登录</string>
-    <string name="antigravity_login_action">登录 Google</string>
-    <string name="antigravity_login_success">Antigravity 登录成功</string>
-    <string name="antigravity_login_failed">Antigravity 登录失败：%1$s</string>
-    <string name="antigravity_logout_action">退出 Antigravity 登录</string>
-    <string name="antigravity_logout_success">已退出 Antigravity 登录</string>
-    <string name="antigravity_auth_title">Antigravity 账号</string>
-    <string name="antigravity_auth_not_logged_in">登录 Google 后使用 Antigravity 订阅额度</string>
-    <string name="antigravity_auth_account">账号：%1$s</string>
-    <string name="antigravity_endpoint_fixed">Antigravity endpoint 由系统固定</string>
-    <string name="antigravity_plan">套餐：%1$s</string>
-    <string name="antigravity_direct_media_processing_desc">将图片直接发送给 Antigravity 处理</string>
-    <string name="antigravity_quota_remaining">剩余 %1$d%%</string>
-    <string name="antigravity_quota_no_data">暂无额度数据</string>
-    <string name="antigravity_quota_refresh">刷新 Antigravity 额度</string>
-    <string name="antigravity_quota_unavailable">额度暂时不可用</string>
-    <string name="antigravity_quota_reset_unknown">重置时间未知</string>
-
-
-<!-- 已移除实验性提示 -->
-    <string name="antigravity_login_completing">正在完成授权并加载账号信息…</string>
-    <string name="antigravity_login_timed_out">等待 Google 授权已超过 15 分钟，请重新发起登录。</string>
+    <!-- Thinking Configuration editor (localized) -->
+    <string name="thinking_config_control_levels">多档滑块</string>
+    <string name="thinking_config_control_toggle_only">仅开关</string>
+    <string name="thinking_config_match_model_contains">模型包含</string>
+    <string name="thinking_config_match_model_prefix">模型前缀</string>
+    <string name="thinking_config_match_model_suffix">模型后缀</string>
+    <string name="thinking_config_match_model_regex">模型正则</string>
+    <string name="thinking_config_match_first_segment">斜杠前段</string>
+    <string name="thinking_config_match_last_segment_prefix">后段前缀</string>
+    <string name="thinking_config_match_last_segment_contains">后段包含</string>
+    <string name="thinking_config_match_last_segment_regex">后段正则</string>
+    <string name="thinking_config_match_endpoint_suffix">端点后缀</string>
+    <string name="thinking_config_not_configured">未配置</string>
+    <string name="thinking_config_collapse">收起</string>
+    <string name="thinking_config_expand">展开</string>
+    <string name="thinking_config_enabled_count">%1$d/%2$d 条启用 · %3$s</string>
+    <string name="thinking_config_no_rules">当前模型配置没有思考规则。</string>
+    <string name="thinking_config_add_rule">添加思考配置</string>
+    <string name="thinking_config_new_rule">新建思考配置</string>
+    <string name="thinking_config_all_models">所有模型</string>
+    <string name="thinking_config_level_count">%1$d 档</string>
+    <string name="thinking_config_toggle">开关</string>
+    <string name="thinking_config_no_request_path">未设置请求路径</string>
+    <string name="thinking_config_enabled">已启用</string>
+    <string name="thinking_config_disabled">已停用</string>
+    <string name="thinking_config_edit">编辑</string>
+    <string name="thinking_config_enable_this_config">启用此配置</string>
+    <string name="thinking_config_write_when_model_matches">匹配到模型时写入思考参数</string>
+    <string name="thinking_config_control">控件</string>
+    <string name="thinking_config_match_method">匹配方式</string>
+    <string name="thinking_config_match_model">匹配模型</string>
+    <string name="thinking_config_multiple_values_comma">多个值用逗号分隔</string>
+    <string name="thinking_config_default_request_path">默认请求路径</string>
+    <string name="thinking_config_request_path_example">reasoning_effort 或 thinking.type</string>
+    <string name="thinking_config_always_enable_thinking">始终开启思考</string>
+    <string name="thinking_config_write_enable_even_off">即使滑块关闭，也写入开启参数</string>
+    <string name="thinking_config_write_on_toggle">开启 / 关闭时写入</string>
+    <string name="thinking_config_write_fixed_by_path">按请求路径写入固定值</string>
+    <string name="thinking_config_write_when_enabled">开启时写入</string>
+    <string name="thinking_config_write_when_disabled">关闭时写入</string>
+    <string name="thinking_config_slider_levels">滑块档位</string>
+    <string name="thinking_config_levels_determine_slider">%1$d 个档位，决定滑块长度</string>
+    <string name="thinking_config_add">添加</string>
+    <string name="thinking_config_path">路径</string>
+    <string name="thinking_config_request_param_path">请求参数路径</string>
+    <string name="thinking_config_value">值</string>
+    <string name="thinking_config_write_value">写入值</string>
+    <string name="thinking_config_delete">删除</string>
+    <string name="thinking_config_add_level">添加档位</string>
+    <string name="thinking_config_drag_to_reorder">拖动排序</string>
+    <string name="thinking_config_level_n">档位 %1$d</string>
+    <string name="thinking_config_display_name">显示名</string>
+    <string name="thinking_config_placeholder_high_zh">例如：高</string>
+    <string name="thinking_config_write_path">写入路径</string>
+    <string name="thinking_config_placeholder_high">例如：high</string>
 </resources>
