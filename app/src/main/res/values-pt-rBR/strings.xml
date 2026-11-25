@@ -532,7 +532,7 @@
     <string name="about_description">Operit AI é um aplicativo assistente inteligente que pode ajudar os usuários a usar os dispositivos com mais eficiência, fornecendo análise de interface, diálogo de chat e outras funções.</string>
     <string name="about_developer">Desenvolvedor: &lt;a href="https://github.com/AAswordman"&gt;AAswordman&lt;/a&gt;</string>
     <string name="about_contact">Contate-nos: aaswordsman@foxmail.com</string>
-    <string name="about_website">&lt;a href="https://github.com/wuhaopeng123-ai/Operit"&gt;GitHub: https://github.com/wuhaopeng123-ai/Operit&lt;/a&gt;</string>
+    <string name="about_website">&lt;a href="https://github.com/AAswordman/Operit"&gt;GitHub: https://github.com/AAswordman/Operit&lt;/a&gt;</string>
     <string name="about_copyright">© 2025 - 2026 Operit. Todos os direitos reservados.</string>
     <string name="star_on_github">Clique em uma estrela no GitHub</string>
     <string name="update_log">Registro de alterações</string>
@@ -2880,6 +2880,7 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="chat_create_dedicated_terminal_session_failed">Não é possível criar uma sessão de terminal independente</string>
     <string name="chat_create_workspace_terminal_session_failed">Não é possível criar uma sessão de terminal do espaço de trabalho</string>
     <string name="chat_execute_command_failed">Falha na execução do comando: %1$s</string>
+    <string name="chat_execute_command_cancel_failed">Não é possível cancelar o comando: a sessão de terminal de destino está fechada ou não está pronta</string>
     <string name="workspace_command_already_running">Já existe um comando de espaço de trabalho em execução</string>
     <string name="workspace_command_running">Comando em execução</string>
     <string name="workspace_command_cancelling">Cancelando pedido...</string>
@@ -3331,7 +3332,6 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="endpoint_completion_hint">Dica: Se você inserir uma URL base, o sistema completará automaticamente o caminho. Para desativá-lo, adicione um sinal # no final do URL.</string>
     <string name="api_key">Chave de API</string>
     <string name="api_key_placeholder_default">Nenhuma chave definida. Digite aqui ou use o pool de chaves de API</string>
-    <string name="api_key_optional_local">Serviços locais geralmente não exigem uma chave</string>
     <string name="api_key_placeholder_custom">Insira a chave API</string>
     <string name="model_name">Nome do modelo</string>
     <string name="model_name_placeholder">Por exemplo: gpt-4, claude-3-opus-20240229...</string>
@@ -3375,38 +3375,38 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="models_selected_suffix">selecionado</string>
     <string name="model_name_multiple_hint">(Você pode separar vários modelos com vírgulas)</string>
     <string name="auto_save_failed">Falha no salvamento automático</string>
-    <string name="provider_openai">ChatGPT (OpenAI)</string>
-    <string name="provider_xai">Grok (SpaceXAI)</string>
-    <string name="provider_openai_responses">ChatGPT Responses (OpenAI)</string>
-    <string name="provider_openai_responses_generic">OpenAI Responses (Generic)</string>
-    <string name="provider_anthropic">Claude (Anthropic)</string>
-    <string name="provider_anthropic_generic">Claude (Generic)</string>
-    <string name="provider_google">Gemini (Google)</string>
-    <string name="provider_gemini_generic">Gemini (Generic)</string>
-    <string name="provider_baidu">ERNIE (Baidu)</string>
-    <string name="provider_aliyun">Qwen (Alibaba Cloud)</string>
-    <string name="provider_xunfei">Spark (iFLYTEK)</string>
-    <string name="provider_zhipu">GLM (Zhipu)</string>
-    <string name="provider_baichuan">Baichuan (Baichuan)</string>
-    <string name="provider_moonshot">Kimi (Moonshot)</string>
-    <string name="provider_deepseek">DeepSeek (DeepSeek)</string>
-    <string name="provider_mistral">Mistral (Mistral AI)</string>
-    <string name="provider_siliconflow">SiliconFlow (SiliconFlow)</string>
-    <string name="provider_iflow">iFlow (Xingchen Qianxun)</string>
-    <string name="provider_openrouter">OpenRouter (OpenRouter)</string>
-    <string name="provider_opencode">OpenCode (Anomaly Innovations)</string>
-    <string name="provider_infiniai">Infini-AI (Infini-AI)</string>
-    <string name="provider_alipay_bailing">Bailing (Alipay)</string>
-    <string name="provider_lmstudio">LM Studio (Local)</string>
-    <string name="provider_ollama">Ollama (Local)</string>
-    <string name="provider_openai_local">OpenAI (Local)</string>
-    <string name="provider_mnn">MNN (Local)</string>
-    <string name="provider_llama_cpp">llama.cpp (Local)</string>
-    <string name="provider_ppinfra">PPInfra (PPIO)</string>
-    <string name="provider_novita">Novita (Novita AI)</string>
-    <string name="provider_minimax">MiniMax (MiniMax)</string>
-    <string name="provider_openai_generic">OpenAI (Generic)</string>
-    <string name="provider_other">Other (Custom)</string>
+    <string name="provider_openai">ChatGPT API</string>
+    <string name="provider_xai">SpaceXAI (Grok)</string>
+    <string name="provider_openai_responses">ChatGPT Responses API</string>
+    <string name="provider_openai_responses_generic">Respostas OpenAIGeral</string>
+    <string name="provider_anthropic">Antrópico (Série Claude)</string>
+    <string name="provider_anthropic_generic">Antrópico Universal</string>
+    <string name="provider_google">Google (série Gêmeos)</string>
+    <string name="provider_gemini_generic">Gêmeos universais</string>
+    <string name="provider_baidu">Baidu (série Wen Xin Yi Yan)</string>
+    <string name="provider_aliyun">Nuvem Alibaba (série Tongyi Qianwen)</string>
+    <string name="provider_xunfei">iFlytek (série Spark Cognition)</string>
+    <string name="provider_zhipu">GLM AI (série ChatGLM)</string>
+    <string name="provider_baichuan">Grande modelo de Baichuan</string>
+    <string name="provider_moonshot">Modelo grande do Lado Escuro da Lua</string>
+    <string name="provider_deepseek">Modelo grande Deepseek</string>
+    <string name="provider_mistral">IA Mistral (Codestral)</string>
+    <string name="provider_siliconflow">fluxo baseado em silício</string>
+    <string name="provider_iflow">iFlow</string>
+    <string name="provider_openrouter">OpenRouter (agregação multimodelo)</string>
+    <string name="provider_opencode">OpenCode</string>
+    <string name="provider_infiniai">Wuwen Xinqiong</string>
+    <string name="provider_alipay_bailing">Alipay Bailing modelo grande</string>
+    <string name="provider_lmstudio">Estúdio LM (modelo local)</string>
+    <string name="provider_ollama">Ollama (modelo local)</string>
+    <string name="provider_openai_local">OpenAI compatível (modelo local)</string>
+    <string name="provider_mnn">Inferência local MNN</string>
+    <string name="provider_llama_cpp">inferência local llama.cpp</string>
+    <string name="provider_ppinfra">Pai Ouyun</string>
+    <string name="provider_novita">Novita AI</string>
+    <string name="provider_minimax">MiniMax</string>
+    <string name="provider_openai_generic">OpenAI Geral</string>
+    <string name="provider_other">Outros fornecedores</string>
     <string name="select_api_provider_title">Escolha o provedor de API</string>
     <string name="search_providers">Provedor de pesquisa</string>
     <string name="max_tokens_name">Número máximo de tokens gerados</string>
@@ -4740,8 +4740,8 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="backup_memory_import_strategy_create_new_desc">Crie nova memória mesmo que o UUID seja o mesmo (pode levar à duplicação)</string>
     <string name="backup_confirm">confirmar</string>
     <string name="backup_cancel">Cancelar</string>
-    <string name="provider_doubao">Doubao (Volcengine)</string>
-    <string name="provider_nvidia">NIM (NVIDIA)</string>
+    <string name="provider_doubao">Saco de feijão (modelo vulcão)</string>
+    <string name="provider_nvidia">NVIDIA (catálogo de APIs)</string>
     <string name="help_loading_message">Carregando manual...</string>
     <string name="vd_overlay_a11y_minimize">minimizar</string>
     <string name="vd_overlay_a11y_exit_fullscreen">Sair da tela inteira</string>
@@ -5702,6 +5702,7 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="gemini_error_cannot_connect">Não foi possível conectar-se ao servidor. Verifique se a conexão de rede ou o endereço API estão corretos</string>
     <string name="gemini_error_max_retries">A aquisição da resposta de IA falhou, o número máximo de novas tentativas foi atingido: %1$s</string>
     <string name="gemini_error_response_failed">Falha na aquisição da resposta de IA: %1$s</string>
+    <string name="gemini_error_empty_contents">Não há conteúdo de mensagem para enviar: o histórico da conversa está vazio ou contém apenas texto de raciocínio</string>
     <string name="gemini_error_connection_timeout">A conexão expirou ou foi interrompida, repetida %1$d vezes: %2$s</string>
     <string name="gemini_connection_success">Conexão bem-sucedida!</string>
     <string name="gemini_connection_test_failed">Falha no teste de conexão: %1$s</string>
@@ -6653,7 +6654,7 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="chat_style_bubble_ai_bubble_water_glass_desc">Quando ativado, o fundo das mensagens de IA em balão exibirá um efeito de vidro d\'água</string>
     <string name="chat_style_bubble_user_image_disabled_by_glass">O fundo de vidro fosco ou vidro d\'água está ativado para o balão do usuário. A imagem de fundo do balão do usuário não será aplicada.</string>
     <string name="chat_style_bubble_ai_image_disabled_by_glass">O fundo de vidro fosco ou vidro d\'água está ativado para o balão de IA. A imagem de fundo do balão de IA não será aplicada.</string>
-    <string name="provider_nous_portal">Nous Portal (Nous Research)</string>
+    <string name="provider_nous_portal">Nous Portal</string>
     <string name="login_github_to_manage_scripts">Faça login no GitHub para publicar e gerenciar seus scripts</string>
     <string name="login_github_to_manage_packages">Faça login no GitHub para publicar e gerenciar seus pacotes de ferramentas</string>
     <string name="market_tab_artifact">Pacotes Sandbox</string>
@@ -6989,7 +6990,7 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     </plurals>
     <string name="pin_chat">Fixar chat</string>
     <string name="unpin_chat">Desafixar chat</string>
-    <string name="provider_mimo">MiMo (Xiaomi)</string>
+    <string name="provider_mimo">Xiaomi MiMo</string>
     <string name="waifu_merge_send">Mesclar e enviar</string>
     <string name="waifu_merge_send_desc">Ao enviar várias mensagens curtas consecutivas, após uma pausa, combina em uma única mensagem para processamento pela IA</string>
     <string name="waifu_merge_send_delay">Intervalo de mesclagem</string>
@@ -7308,8 +7309,7 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="artifact_publish_github_release">GitHub Release</string>
     <string name="artifact_publish_github_release_asset">Ativo do Release</string>
     <string name="markdown_link_not_openable">Este link aponta para uma referência dentro do documento e não pode ser aberto</string>
-    <string name="provider_openai_codex">Codex (OpenAI)</string>
-    <string name="provider_antigravity">Antigravity (Google)</string>
+    <string name="provider_openai_codex">Codex</string>
     <string name="onboarding_config_codex_login_required">Faça login no Codex primeiro</string>
     <string name="codex_login_title">Login no Codex</string>
     <string name="codex_login_starting">Preparando o login do Codex...</string>
@@ -7412,9 +7412,8 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="github_login_method_external">Entrar com navegador externo</string>
     <string name="github_login_starting">Preparando autorização do GitHub...</string>
     <string name="artifact_publish_toolpkg_version_readonly">A versão de publicação do ToolPkg vem do manifesto do pacote e não pode ser alterada manualmente antes da publicação</string>
-    <string name="market_version_incompatible_title">Não foi possível baixar: versão do cliente não suportada</string>
-    <string name="market_version_too_low_message">A versão atual do cliente %1$s é inferior à versão mínima exigida %2$s para este recurso. Atualize o cliente antes de baixar.</string>
-    <string name="market_version_too_high_message">A versão atual do cliente %1$s é superior à versão máxima suportada %2$s para este recurso. Use uma versão de cliente suportada.</string>
+    <string name="market_toolpkg_api_incompatible_title">Não é possível instalar: API do ToolPkg não suportada</string>
+    <string name="market_toolpkg_api_incompatible_message">Este plugin declara a API do ToolPkg %1$s. Este dispositivo suporta %2$s, portanto o plugin não pode ser instalado.</string>
     <string name="external_http_chat_a2a_title">Interface A2A Agent</string>
     <string name="external_http_chat_a2a_desc">Fornece o serviço A2A 1.0 JSON-RPC usando a mesma porta de escuta e Bearer Token. Primeiro, forneça o endereço do Agent Card ao cliente A2A para descoberta.</string>
     <string name="external_http_chat_a2a_agent_card">Endereço do Agent Card</string>
@@ -7511,13 +7510,4 @@ Agora é possível usar o modo AutoGLM na interface de diálogo.</string>
     <string name="token_activity_chart_tap_hint">Toque no gráfico para ver dados detalhados</string>
     <string name="token_activity_total_tokens">Tokens acumulados</string>
     <string name="token_activity_peak_tokens">Pico de tokens</string>
-    <string name="provider_section_generic_compatible">Compatibilidade genérica</string>
-    <string name="provider_section_proprietary">Provedores dedicados</string>
-    <string name="provider_section_aggregation">Agregação de modelos</string>
-    <string name="provider_section_local">Modelos locais</string>
-
-
-<!-- 已移除实验性提示 -->
-    <string name="antigravity_login_completing">Concluindo a autorização e carregando os dados da conta…</string>
-    <string name="antigravity_login_timed_out">O tempo de espera de 15 minutos pela autorização do Google terminou. Inicie o login novamente.</string>
 </resources>
