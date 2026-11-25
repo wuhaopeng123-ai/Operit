@@ -88,7 +88,7 @@
     <string name="about_description">Operit AI es una aplicación de asistente inteligente que ayuda a los usuarios a utilizar sus dispositivos de manera más eficiente, proporcionando funciones como análisis de interfaz y chat.</string>
     <string name="about_developer">Desarrollador: &lt;a href="https://github.com/AAswordman"&gt;AAswordman&lt;/a&gt;</string>
     <string name="about_contact">Contáctenos: aaswordsman@foxmail.com</string>
-    <string name="about_website">&lt;a href="https://github.com/wuhaopeng123-ai/Operit"&gt;GitHub: https://github.com/wuhaopeng123-ai/Operit&lt;/a&gt;</string>
+    <string name="about_website">&lt;a href="https://github.com/AAswordman/Operit"&gt;GitHub: https://github.com/AAswordman/Operit&lt;/a&gt;</string>
     <string name="about_copyright">© 2025 - 2026 Operit. Todos los derechos reservados.</string>
 
     <!-- AI Chat Screen -->
@@ -1197,7 +1197,6 @@
     <string name="actual_request_url">URL de solicitud real: %s</string>
     <string name="endpoint_completion_hint">Sugerencia: Si ingresas una URL base, el sistema completará automáticamente la ruta. Para desactivar, agrega # al final de la URL.</string>
     <string name="api_key_placeholder_default">No hay clave establecida. Escríbela aquí o usa el grupo de claves API</string>
-    <string name="api_key_optional_local">Los servicios locales normalmente no requieren una clave</string>
     <string name="api_key_placeholder_custom">Ingresa clave API</string>
     <string name="model_name_placeholder">ej.: gpt-4, claude-3-opus-20240229...</string>
     <string name="get_models_list">Obtener Lista de Modelos</string>
@@ -1224,34 +1223,34 @@
     <string name="close">Cerrar</string>
     
     <!-- API Provider names -->
-    <string name="provider_openai">ChatGPT (OpenAI)</string>
-    <string name="provider_xai">Grok (SpaceXAI)</string>
-    <string name="provider_openai_responses">ChatGPT Responses (OpenAI)</string>
-    <string name="provider_openai_responses_generic">OpenAI Responses (Generic)</string>
-    <string name="provider_openai_generic">OpenAI (Generic)</string>
-    <string name="provider_anthropic">Claude (Anthropic)</string>
-    <string name="provider_anthropic_generic">Claude (Generic)</string>
-    <string name="provider_google">Gemini (Google)</string>
-    <string name="provider_gemini_generic">Gemini (Generic)</string>
-    <string name="provider_baidu">ERNIE (Baidu)</string>
-    <string name="provider_aliyun">Qwen (Alibaba Cloud)</string>
-    <string name="provider_xunfei">Spark (iFLYTEK)</string>
-    <string name="provider_zhipu">GLM (Zhipu)</string>
-    <string name="provider_baichuan">Baichuan (Baichuan)</string>
-    <string name="provider_moonshot">Kimi (Moonshot)</string>
-    <string name="provider_deepseek">DeepSeek (DeepSeek)</string>
-    <string name="provider_mistral">Mistral (Mistral AI)</string>
-    <string name="provider_siliconflow">SiliconFlow (SiliconFlow)</string>
-    <string name="provider_iflow">iFlow (Xingchen Qianxun)</string>
-    <string name="provider_openrouter">OpenRouter (OpenRouter)</string>
-    <string name="provider_opencode">OpenCode (Anomaly Innovations)</string>
-    <string name="provider_infiniai">Infini-AI (Infini-AI)</string>
-    <string name="provider_lmstudio">LM Studio (Local)</string>
-    <string name="provider_ollama">Ollama (Local)</string>
-    <string name="provider_openai_local">OpenAI (Local)</string>
-    <string name="provider_novita">Novita (Novita AI)</string>
-    <string name="provider_minimax">MiniMax (MiniMax)</string>
-    <string name="provider_other">Other (Custom)</string>
+    <string name="provider_openai">ChatGPT API</string>
+    <string name="provider_xai">SpaceXAI (Grok)</string>
+    <string name="provider_openai_responses">ChatGPT Responses API</string>
+    <string name="provider_openai_responses_generic">OpenAI Responses (Genérico)</string>
+    <string name="provider_openai_generic">OpenAI genérico</string>
+    <string name="provider_anthropic">Anthropic (Serie Claude)</string>
+    <string name="provider_anthropic_generic">Anthropic genérico</string>
+    <string name="provider_google">Google (Serie Gemini)</string>
+    <string name="provider_gemini_generic">Gemini genérico</string>
+    <string name="provider_baidu">Baidu (Serie ERNIE)</string>
+    <string name="provider_aliyun">Alibaba Cloud (Serie Qwen)</string>
+    <string name="provider_xunfei">iFLYTEK (Serie Spark)</string>
+    <string name="provider_zhipu">Zhipu AI (Serie ChatGLM)</string>
+    <string name="provider_baichuan">Modelos Baichuan</string>
+    <string name="provider_moonshot">Moonshot AI</string>
+    <string name="provider_deepseek">Modelos Deepseek</string>
+    <string name="provider_mistral">Mistral AI (Codestral)</string>
+    <string name="provider_siliconflow">SiliconFlow</string>
+    <string name="provider_iflow">iFlow</string>
+    <string name="provider_openrouter">OpenRouter (Hub Multi-modelo)</string>
+    <string name="provider_opencode">OpenCode</string>
+    <string name="provider_infiniai">InfiniAI</string>
+    <string name="provider_lmstudio">LM Studio (modelo local)</string>
+    <string name="provider_ollama">Ollama (modelo local)</string>
+    <string name="provider_openai_local">OpenAI compatible (modelo local)</string>
+    <string name="provider_novita">Novita AI</string>
+    <string name="provider_minimax">MiniMax</string>
+    <string name="provider_other">Otros proveedores</string>
     <string name="select_api_provider_title">Seleccionar Proveedor API</string>
     <string name="search_providers">Buscar proveedores</string>
     <!-- ModelParametersSection strings -->
@@ -1383,8 +1382,8 @@
     <string name="thinking_quality">Intensidad de pensamiento</string>
     <string name="thinking_quality_desc">Solo funciona en el modo de pensamiento. Los valores disponibles siguen el mapeo real del modelo y del proveedor actuales.</string>
     
-    <string name="provider_doubao">Doubao (Volcengine)</string>
-    <string name="provider_nvidia">NIM (NVIDIA)</string>
+    <string name="provider_doubao">Doubao (Modelo Volcano)</string>
+    <string name="provider_nvidia">NVIDIA (API Catalog)</string>
 
     <string name="speech_services_stt_type_openai">OpenAI STT (Remoto)</string>
     <string name="speech_services_stt_type_deepgram">Deepgram STT (Remoto)</string>
@@ -3554,6 +3553,7 @@ Ahora puede usar el modo AutoGLM en la interfaz de conversación.</string>
     <string name="chat_create_dedicated_terminal_session_failed">No se pudo crear la sesión de terminal independiente</string>
     <string name="chat_create_workspace_terminal_session_failed">No se pudo crear la sesión de terminal del espacio de trabajo</string>
     <string name="chat_execute_command_failed">Error al ejecutar el comando: %1$s</string>
+    <string name="chat_execute_command_cancel_failed">No se puede cancelar el comando: la sesión de terminal de destino está cerrada o no está lista</string>
     <string name="workspace_command_already_running">Ya hay un comando del espacio de trabajo en ejecución</string>
     <string name="workspace_command_running">Comando en ejecución</string>
     <string name="workspace_command_cancelling">Cancelando comando...</string>
@@ -3793,11 +3793,11 @@ Ahora puede usar el modo AutoGLM en la interfaz de conversación.</string>
     <string name="models_selected_suffix"> seleccionado(s)</string>
     <string name="model_name_multiple_hint"> (se pueden separar varios modelos con comas)</string>
     <string name="auto_save_failed">Error al guardar automáticamente</string>
-    <string name="provider_nous_portal">Nous Portal (Nous Research)</string>
-    <string name="provider_alipay_bailing">Bailing (Alipay)</string>
-    <string name="provider_mnn">MNN (Local)</string>
-    <string name="provider_llama_cpp">llama.cpp (Local)</string>
-    <string name="provider_ppinfra">PPInfra (PPIO)</string>
+    <string name="provider_nous_portal">Nous Portal</string>
+    <string name="provider_alipay_bailing">Modelo Bailing de Alipay</string>
+    <string name="provider_mnn">Inferencia local MNN</string>
+    <string name="provider_llama_cpp">Inferencia local llama.cpp</string>
+    <string name="provider_ppinfra">Paiyun</string>
     <string name="reset">Restablecer</string>
     <string name="collapsed">Contraído</string>
     <string name="expanded">Expandido</string>
@@ -6444,6 +6444,7 @@ Ahora puede usar el modo AutoGLM en la interfaz de conversación.</string>
     <string name="gemini_error_cannot_connect">No se puede conectar al servidor. Verifique la conexión de red o la dirección de la API.</string>
     <string name="gemini_error_max_retries">Error al obtener la respuesta de la IA: se alcanzó el máximo de reintentos: %1$s</string>
     <string name="gemini_error_response_failed">Error al obtener la respuesta de la IA: %1$s</string>
+    <string name="gemini_error_empty_contents">No hay contenido de mensaje para enviar: el historial de la conversación está vacío o solo contiene texto de razonamiento</string>
     <string name="gemini_error_connection_timeout">Tiempo de espera agotado o conexión interrumpida. Reintentos: %1$d. Detalles: %2$s</string>
     <string name="gemini_connection_success">¡Conexión exitosa!</string>
     <string name="gemini_connection_test_failed">Prueba de conexión fallida: %1$s</string>
@@ -7219,7 +7220,7 @@ Ahora puede usar el modo AutoGLM en la interfaz de conversación.</string>
     </plurals>
     <string name="pin_chat">Fijar chat</string>
     <string name="unpin_chat">Desfijar chat</string>
-    <string name="provider_mimo">MiMo (Xiaomi)</string>
+    <string name="provider_mimo">Xiaomi MiMo</string>
     <string name="waifu_merge_send">Combinar y enviar</string>
     <string name="waifu_merge_send_desc">Al enviar varios mensajes cortos consecutivos, se combinan en uno después de una pausa y se envían a la IA</string>
     <string name="waifu_merge_send_delay">Intervalo de combinación</string>
@@ -7538,8 +7539,7 @@ Ahora puede usar el modo AutoGLM en la interfaz de conversación.</string>
     <string name="artifact_publish_github_release">GitHub Release</string>
     <string name="artifact_publish_github_release_asset">Activo de Release</string>
     <string name="markdown_link_not_openable">Este enlace apunta a una referencia dentro del documento y no se puede abrir</string>
-    <string name="provider_openai_codex">Codex (OpenAI)</string>
-    <string name="provider_antigravity">Antigravity (Google)</string>
+    <string name="provider_openai_codex">Codex</string>
     <string name="onboarding_config_codex_login_required">Inicia sesión primero en Codex</string>
     <string name="codex_login_title">Iniciar sesión en Codex</string>
     <string name="codex_login_starting">Preparando el inicio de sesión de Codex...</string>
@@ -7642,9 +7642,8 @@ Ahora puede usar el modo AutoGLM en la interfaz de conversación.</string>
     <string name="github_login_method_external">Iniciar sesión con navegador externo</string>
     <string name="github_login_starting">Preparando autorización de GitHub…</string>
     <string name="artifact_publish_toolpkg_version_readonly">La versión de publicación de ToolPkg proviene del manifiesto del paquete y no se puede modificar manualmente antes de publicar</string>
-    <string name="market_version_incompatible_title">No se puede descargar: versión del cliente no compatible</string>
-    <string name="market_version_too_low_message">La versión actual del cliente %1$s es inferior a la versión mínima requerida %2$s para este recurso. Actualice el cliente antes de descargar.</string>
-    <string name="market_version_too_high_message">La versión actual del cliente %1$s es superior a la versión máxima compatible %2$s para este recurso. Utilice una versión de cliente compatible.</string>
+    <string name="market_toolpkg_api_incompatible_title">No se puede instalar: API de ToolPkg no compatible</string>
+    <string name="market_toolpkg_api_incompatible_message">Este complemento declara la API de ToolPkg %1$s. Este dispositivo admite %2$s, por lo que no se puede instalar.</string>
     <string name="external_http_chat_a2a_title">Interfaz de agente A2A</string>
     <string name="external_http_chat_a2a_desc">Proporciona un servicio JSON-RPC A2A 1.0 en el mismo puerto de escucha y con el mismo Bearer Token. Primero entregue la dirección de la Agent Card a los clientes A2A para que la descubran.</string>
     <string name="external_http_chat_a2a_agent_card">Dirección de Agent Card</string>
@@ -7822,13 +7821,4 @@ Ahora puede usar el modo AutoGLM en la interfaz de conversación.</string>
     <string name="token_stats_trends">Análisis de tendencias</string>
     <string name="token_stats_settings">Configuración de estadísticas</string>
     <string name="token_stats_custom_range_confirm">Aceptar</string>
-    <string name="provider_section_generic_compatible">Compatibilidad genérica</string>
-    <string name="provider_section_proprietary">Proveedores dedicados</string>
-    <string name="provider_section_aggregation">Agregación de modelos</string>
-    <string name="provider_section_local">Modelos locales</string>
-
-
-<!-- 已移除实验性提示 -->
-    <string name="antigravity_login_completing">Completando la autorización y cargando los datos de la cuenta…</string>
-    <string name="antigravity_login_timed_out">Se agotaron los 15 minutos de espera de la autorización de Google. Inicia sesión de nuevo.</string>
 </resources>
