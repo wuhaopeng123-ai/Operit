@@ -587,7 +587,7 @@
     <string name="about_description">Operit AI is an intelligent assistant application that helps users use their devices more efficiently, providing interface analysis, chat conversations, and more.</string>
     <string name="about_developer">Developer: &lt;a href="https://github.com/AAswordman"&gt;AAswordman&lt;/a&gt;</string>
     <string name="about_contact">Contact Us: aaswordsman@foxmail.com</string>
-    <string name="about_website">&lt;a href="https://github.com/wuhaopeng123-ai/Operit"&gt;GitHub: https://github.com/wuhaopeng123-ai/Operit&lt;/a&gt;</string>
+    <string name="about_website">&lt;a href="https://github.com/AAswordman/Operit"&gt;GitHub: https://github.com/AAswordman/Operit&lt;/a&gt;</string>
     <string name="about_copyright">© 2025 - 2026 Operit. All Rights Reserved.</string>
     <string name="star_on_github">Star on GitHub</string>
     <string name="update_log">Update Log</string>
@@ -3611,6 +3611,7 @@
     <string name="chat_create_dedicated_terminal_session_failed">Failed to create dedicated terminal session</string>
     <string name="chat_create_workspace_terminal_session_failed">Failed to create workspace terminal session</string>
     <string name="chat_execute_command_failed">Command execution failed: %1$s</string>
+    <string name="chat_execute_command_cancel_failed">Cannot cancel the command: the target terminal session is closed or not ready</string>
     <string name="workspace_command_already_running">A workspace command is already running</string>
     <string name="workspace_command_running">Command running</string>
     <string name="workspace_command_cancelling">Cancelling command...</string>
@@ -4175,7 +4176,6 @@
     <string name="actual_request_url">Actual request URL: %s</string>
     <string name="endpoint_completion_hint">Hint: If you enter a base URL, the system will automatically complete the path. To disable, add # at the end of the URL.</string>
     <string name="api_key_placeholder_default">No key set. Type one here or use the API key pool</string>
-    <string name="api_key_optional_local">Local services usually do not require a key</string>
     <string name="api_key_placeholder_custom">Enter API key</string>
     <string name="model_name_placeholder">e.g.: gpt-4, claude-3-opus-20240229...</string>
     <string name="get_models_list">Get Models List</string>
@@ -4225,49 +4225,47 @@
     <string name="model_name_multiple_hint"> (can use comma to separate multiple models)</string>
     <string name="auto_save_failed">Auto save failed</string>
     <!-- API Provider names -->
-    <string name="provider_openai">ChatGPT (OpenAI)</string>
-    <string name="provider_xai">Grok (SpaceXAI)</string>
-    <string name="provider_openai_responses">ChatGPT Responses (OpenAI)</string>
+    <string name="provider_openai">ChatGPT API</string>
+    <string name="provider_xai">SpaceXAI (Grok)</string>
+    <string name="provider_openai_responses">ChatGPT Responses API</string>
     <string name="provider_openai_responses_generic">OpenAI Responses (Generic)</string>
-    <string name="provider_anthropic">Claude (Anthropic)</string>
-    <string name="provider_anthropic_generic">Claude (Generic)</string>
-    <string name="provider_google">Gemini (Google)</string>
+    <string name="provider_anthropic">Anthropic (Claude Series)</string>
+    <string name="provider_anthropic_generic">Anthropic (Generic)</string>
+    <string name="provider_google">Google (Gemini Series)</string>
     <string name="provider_gemini_generic">Gemini (Generic)</string>
-    <string name="provider_baidu">ERNIE (Baidu)</string>
-    <string name="provider_aliyun">Qwen (Alibaba Cloud)</string>
-    <string name="provider_xunfei">Spark (iFLYTEK)</string>
-    <string name="provider_zhipu">GLM (Zhipu)</string>
-    <string name="provider_baichuan">Baichuan (Baichuan)</string>
-    <string name="provider_moonshot">Kimi (Moonshot)</string>
-    <string name="provider_mimo">MiMo (Xiaomi)</string>
-    <string name="provider_deepseek">DeepSeek (DeepSeek)</string>
-    <string name="provider_mistral">Mistral (Mistral AI)</string>
-    <string name="provider_siliconflow">SiliconFlow (SiliconFlow)</string>
-    <string name="provider_iflow">iFlow (Xingchen Qianxun)</string>
-    <string name="provider_openrouter">OpenRouter (OpenRouter)</string>
-    <string name="provider_opencode">OpenCode (Anomaly Innovations)</string>
+    <string name="provider_baidu">Baidu (ERNIE Series)</string>
+    <string name="provider_aliyun">Alibaba Cloud (Qwen Series)</string>
+    <string name="provider_xunfei">iFLYTEK (Spark Series)</string>
+    <string name="provider_zhipu">Zhipu AI (ChatGLM Series)</string>
+    <string name="provider_baichuan">Baichuan Models</string>
+    <string name="provider_moonshot">Moonshot AI</string>
+    <string name="provider_mimo">Xiaomi MiMo</string>
+    <string name="provider_deepseek">Deepseek Models</string>
+    <string name="provider_mistral">Mistral AI (Codestral)</string>
+    <string name="provider_siliconflow">SiliconFlow</string>
+    <string name="provider_iflow">iFlow</string>
+    <string name="provider_openrouter">OpenRouter (Multi-model Hub)</string>
+    <string name="provider_opencode">OpenCode</string>
     <string name="provider_4router">4Router</string>
-    <string name="provider_nous_portal">Nous Portal (Nous Research)</string>
-    <string name="provider_infiniai">Infini-AI (Infini-AI)</string>
-    <string name="provider_alipay_bailing">Bailing (Alipay)</string>
-    <string name="provider_lmstudio">LM Studio (Local)</string>
-    <string name="provider_ollama">Ollama (Local)</string>
-    <string name="provider_openai_local">OpenAI (Local)</string>
-    <string name="provider_ppinfra">PPInfra (PPIO)</string>
-    <string name="provider_novita">Novita (Novita AI)</string>
-    <string name="provider_minimax">MiniMax (MiniMax)</string>
+    <string name="provider_nous_portal">Nous Portal</string>
+    <string name="provider_infiniai">InfiniAI</string>
+    <string name="provider_alipay_bailing">Alipay Bailing Model</string>
+    <string name="provider_lmstudio">LM Studio (Local Model)</string>
+    <string name="provider_ollama">Ollama (Local Model)</string>
+    <string name="provider_openai_local">OpenAI-Compatible (Local Model)</string>
+    <string name="provider_ppinfra">PPInfra Cloud</string>
+    <string name="provider_novita">Novita AI</string>
+    <string name="provider_minimax">MiniMax</string>
     <string name="provider_openai_generic">OpenAI (Generic)</string>
-    <string name="provider_other">Other (Custom)</string>
-    <string name="provider_doubao">Doubao (Volcengine)</string>
-    <string name="provider_nvidia">NIM (NVIDIA)</string>
-    <string name="provider_llama_cpp">llama.cpp (Local)</string>
-    <string name="provider_mnn">MNN (Local)</string>
+    <string name="provider_other">Other Providers</string>
+    <string name="provider_doubao">Doubao</string>
+    <string name="provider_nvidia">NVIDIA (API Catalog)</string>
+    <string name="provider_llama_cpp">llama.cpp Local Inference</string>
+    <string name="provider_mnn">MNN Local Inference</string>
     <string name="select_api_provider_title">Select API Provider</string>
     <string name="search_providers">Search providers</string>
     <string name="provider_section_generic_compatible">Generic Compatibility</string>
     <string name="provider_section_proprietary">Dedicated Providers</string>
-    <string name="provider_section_aggregation">Model Aggregation</string>
-    <string name="provider_section_local">Local Models</string>
 
     <!-- llama.cpp Local Inference -->
     <string name="llama_local_model_tip">Local models are usually weaker. Consider disabling memory links and disabling tools for chat.</string>
@@ -5969,6 +5967,7 @@
     <string name="patch_update_stage_verifying_patch_step">Verifying patch package (%1$d/%2$d)</string>
     <string name="patch_update_stage_applying_patch_step">Applying patch (%1$d/%2$d)</string>
     <string name="patch_update_stage_verifying_new_apk_step">Verifying new APK (%1$d/%2$d)</string>
+    <string name="update_source_failed_reason">%1$s failed: %2$s</string>
     <string name="patch_install_confirm_title">Install patch update</string>
     <string name="patch_install_confirm_message">New patch version detected: %1$s\n\nInstall now?</string>
     <string name="prepare_patch_update">Preparing patch update...</string>
@@ -6809,6 +6808,7 @@
     <string name="gemini_error_cannot_connect">Cannot connect to server, please check network connection and API address</string>
     <string name="gemini_error_max_retries">Failed to get AI response, max retries reached: %1$s</string>
     <string name="gemini_error_response_failed">Failed to get AI response: %1$s</string>
+    <string name="gemini_error_empty_contents">No message content to send: the conversation history is empty or contains only thinking text</string>
     <string name="gemini_error_connection_timeout">Connection timeout or interrupted, retried %1$d times: %2$s</string>
     <string name="gemini_connection_success">Connection successful!</string>
     <string name="gemini_connection_test_failed">Connection test failed: %1$s</string>
@@ -8477,7 +8477,7 @@
     <string name="markdown_link_not_openable">This link points to a reference inside the document and cannot be opened</string>
     <string name="openai_file_omitted">File content omitted, current model does not support file processing</string>
 
-    <string name="provider_openai_codex">Codex (OpenAI)</string>
+    <string name="provider_openai_codex">Codex</string>
     <string name="onboarding_config_codex_login_required">Sign in to Codex first</string>
     <string name="codex_login_title">Sign in to Codex</string>
     <string name="codex_login_starting">Preparing Codex sign-in...</string>
@@ -8502,27 +8502,6 @@
     <string name="codex_usage_unavailable">Usage is temporarily unavailable</string>
     <string name="codex_reset_after_days">Resets in %1$d days</string>
     <string name="codex_reset_after_clock">Resets in %1$02d:%2$02d</string>
-    <string name="provider_antigravity">Antigravity (Google)</string>
-    <string name="onboarding_config_antigravity_login_required">Sign in to Antigravity first</string>
-    <string name="antigravity_login_title">Sign in to Antigravity</string>
-    <string name="antigravity_login_starting">Preparing Antigravity sign-in...</string>
-    <string name="antigravity_login_waiting">Finish Google sign-in in the browser</string>
-    <string name="antigravity_login_action">Sign in with Google</string>
-    <string name="antigravity_login_success">Antigravity sign-in succeeded</string>
-    <string name="antigravity_login_failed">Antigravity sign-in failed: %1$s</string>
-    <string name="antigravity_logout_action">Sign out of Antigravity</string>
-    <string name="antigravity_logout_success">Signed out of Antigravity</string>
-    <string name="antigravity_auth_title">Antigravity account</string>
-    <string name="antigravity_auth_not_logged_in">Sign in with Google to use the Antigravity quota</string>
-    <string name="antigravity_auth_account">Account: %1$s</string>
-    <string name="antigravity_endpoint_fixed">The Antigravity endpoint is fixed</string>
-    <string name="antigravity_plan">Plan: %1$s</string>
-    <string name="antigravity_direct_media_processing_desc">Send images directly to Antigravity</string>
-    <string name="antigravity_quota_remaining">%1$d%% remaining</string>
-    <string name="antigravity_quota_no_data">No quota data</string>
-    <string name="antigravity_quota_refresh">Refresh Antigravity quota</string>
-    <string name="antigravity_quota_unavailable">Quota is temporarily unavailable</string>
-    <string name="antigravity_quota_reset_unknown">Reset time unavailable</string>
     <string name="conversation_media_file_link">&lt;link type=&quot;file&quot; id=&quot;%1$s&quot; filename=&quot;%2$s&quot;&gt;PDF&lt;/link&gt;</string>
 
     <string name="package_market_origin_title">External Package Source Notice</string>
@@ -8538,13 +8517,63 @@
     <string name="market_manage_submit_revision">Submit new version after modification</string>
     <string name="market_manage_loading_request_title">Loading Request</string>
     <string name="market_manage_loading_request_message">Request is being processed, please wait…</string>
-    <string name="market_version_incompatible_title">Cannot Download: Client Version Not Supported</string>
-    <string name="market_version_too_low_message">Current client version %1$s is lower than the minimum required version %2$s for this resource. Please update the client before downloading.</string>
-    <string name="market_version_too_high_message">Current client version %1$s is higher than the maximum supported version %2$s for this resource. Please use a supported client version.</string>
+    <string name="market_toolpkg_api_incompatible_title">Cannot Install: ToolPkg API Not Supported</string>
+    <string name="market_toolpkg_api_incompatible_message">This plugin declares ToolPkg API %1$s. This device supports %2$s, so this plugin cannot be installed.</string>
     <string name="thinking_config_invalid_json">Invalid Thinking Configuration</string>
 
-
-<!-- 已移除实验性提示 -->
-    <string name="antigravity_login_completing">Completing authorization and loading account details…</string>
-    <string name="antigravity_login_timed_out">Timed out after waiting 15 minutes for Google authorization. Please start sign-in again.</string>
+    <!-- Thinking Configuration editor (localized) -->
+    <string name="thinking_config_control_levels">Multi-level slider</string>
+    <string name="thinking_config_control_toggle_only">Toggle only</string>
+    <string name="thinking_config_match_model_contains">Model contains</string>
+    <string name="thinking_config_match_model_prefix">Model prefix</string>
+    <string name="thinking_config_match_model_suffix">Model suffix</string>
+    <string name="thinking_config_match_model_regex">Model regex</string>
+    <string name="thinking_config_match_first_segment">First path segment</string>
+    <string name="thinking_config_match_last_segment_prefix">Last segment prefix</string>
+    <string name="thinking_config_match_last_segment_contains">Last segment contains</string>
+    <string name="thinking_config_match_last_segment_regex">Last segment regex</string>
+    <string name="thinking_config_match_endpoint_suffix">Endpoint suffix</string>
+    <string name="thinking_config_not_configured">Not configured</string>
+    <string name="thinking_config_collapse">Collapse</string>
+    <string name="thinking_config_expand">Expand</string>
+    <string name="thinking_config_enabled_count">%1$d/%2$d enabled · %3$s</string>
+    <string name="thinking_config_no_rules">No thinking rules configured for this model.</string>
+    <string name="thinking_config_add_rule">Add thinking config</string>
+    <string name="thinking_config_new_rule">New thinking config</string>
+    <string name="thinking_config_all_models">All models</string>
+    <string name="thinking_config_level_count">%1$d levels</string>
+    <string name="thinking_config_toggle">Toggle</string>
+    <string name="thinking_config_no_request_path">No request path set</string>
+    <string name="thinking_config_enabled">Enabled</string>
+    <string name="thinking_config_disabled">Disabled</string>
+    <string name="thinking_config_edit">Edit</string>
+    <string name="thinking_config_enable_this_config">Enable this config</string>
+    <string name="thinking_config_write_when_model_matches">Write thinking params when a model matches</string>
+    <string name="thinking_config_control">Control</string>
+    <string name="thinking_config_match_method">Match method</string>
+    <string name="thinking_config_match_model">Match model</string>
+    <string name="thinking_config_multiple_values_comma">Multiple values, comma-separated</string>
+    <string name="thinking_config_default_request_path">Default request path</string>
+    <string name="thinking_config_request_path_example">reasoning_effort or thinking.type</string>
+    <string name="thinking_config_always_enable_thinking">Always enable thinking</string>
+    <string name="thinking_config_write_enable_even_off">Write enable param even when slider is off</string>
+    <string name="thinking_config_write_on_toggle">Write on enable / disable</string>
+    <string name="thinking_config_write_fixed_by_path">Write fixed value by request path</string>
+    <string name="thinking_config_write_when_enabled">Write when enabled</string>
+    <string name="thinking_config_write_when_disabled">Write when disabled</string>
+    <string name="thinking_config_slider_levels">Slider levels</string>
+    <string name="thinking_config_levels_determine_slider">%1$d levels, determines slider length</string>
+    <string name="thinking_config_add">Add</string>
+    <string name="thinking_config_path">Path</string>
+    <string name="thinking_config_request_param_path">Request param path</string>
+    <string name="thinking_config_value">Value</string>
+    <string name="thinking_config_write_value">Write value</string>
+    <string name="thinking_config_delete">Delete</string>
+    <string name="thinking_config_add_level">Add level</string>
+    <string name="thinking_config_drag_to_reorder">Drag to reorder</string>
+    <string name="thinking_config_level_n">Level %1$d</string>
+    <string name="thinking_config_display_name">Display name</string>
+    <string name="thinking_config_placeholder_high_zh">e.g. high</string>
+    <string name="thinking_config_write_path">Write path</string>
+    <string name="thinking_config_placeholder_high">e.g. high</string>
 </resources>
